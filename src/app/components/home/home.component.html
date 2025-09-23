@@ -1,0 +1,19 @@
+<div class="form-box">
+  <h1>Bienvenido a Sala de Juegos</h1>
+
+  <ng-container *ngIf="user$ | async as user; else guest">
+    <p>Hola, <strong>{{ user.email }}</strong> </p>
+    <div class="buttons">
+      <a routerLink="/juegos" class="btn-link">Ir a Juegos</a>
+      <a (click)="logout()" class="btn-link">Cerrar Sesión</a>
+    </div>
+  </ng-container>
+
+  <ng-template #guest>
+    <p>Selecciona una opción para comenzar:</p>
+    <div class="buttons">
+      <a routerLink="/login" class="btn-link">Iniciar Sesión</a>
+      <a routerLink="/registro" class="btn-link">Registrarse</a>
+    </div>
+  </ng-template>
+</div>

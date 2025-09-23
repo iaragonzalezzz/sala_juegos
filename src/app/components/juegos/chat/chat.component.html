@@ -1,0 +1,35 @@
+<div class="chat-container">
+  <div class="chat-header">
+    <h2>Sala de Chat</h2>
+  </div>
+
+  <div class="chat-mensajes">
+    <div
+      *ngFor="let msg of mensajes"
+      [ngClass]="{ 'msg-propio': msg.usuario === usuario, 'msg-otro': msg.usuario !== usuario }"
+      class="mensaje"
+    >
+      <div class="mensaje-usuario">
+        <strong>{{ msg.usuario }}</strong>
+        <small>{{ msg.creado_en | date: 'shortTime' }}</small>
+      </div>
+      <div class="mensaje-texto">
+        {{ msg.mensaje }}
+      </div>
+    </div>
+  </div>
+
+  <div class="chat-input">
+    <input
+      [(ngModel)]="nuevoMensaje"
+      type="text"
+      placeholder="Escribe tu mensaje..."
+      (keyup.enter)="enviarMensaje()"
+    />
+    <button (click)="enviarMensaje()">Enviar</button>
+  </div>
+
+  <div class="chat-footer">
+    <button class="btn-volver" (click)="volver()">Volver</button>
+  </div>
+</div>

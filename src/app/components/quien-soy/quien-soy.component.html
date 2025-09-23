@@ -1,0 +1,63 @@
+<div class="row mt-5">
+  <div class="col-md-4 text-center">
+    <img
+      [src]="user?.avatar_url"
+      [alt]="user?.name"
+      class="img-fluid rounded-circle shadow"
+      style="width: 200px; height: 200px; object-fit: cover; border: 5px solid #007bff;"
+    />
+    <h3 class="mt-3">{{ user?.name || 'Cargando...' }}</h3>
+    <p class="text-muted">
+      <i class="bi bi-github"></i>
+      <a [href]="user?.html_url" target="_blank" class="text-decoration-none">
+        @{{ githubUsername }}
+      </a>
+    </p>
+  </div>
+
+  <div class="col-md-8">
+    <div class="card">
+      <div class="card-body">
+        <h4><i class="bi bi-person-badge"></i> Sobre mí</h4>
+        <p>{{ user?.bio || 'Sin biografía en GitHub.' }}</p>
+
+        <div class="d-flex gap-4 mb-4">
+          <div class="text-center">
+            <div class="display-6">{{ user?.public_repos || 0 }}</div>
+            <small>Repositorios</small>
+          </div>
+          <div class="text-center">
+            <div class="display-6">{{ user?.followers || 0 }}</div>
+            <small>Seguidores</small>
+          </div>
+        </div>
+
+        <h4 class="mt-4"><i class="bi bi-controller"></i> Mi juego propio se llama: "Adivina el Número"</h4>
+        <p>
+          <strong>¿Por qué lo elegí?</strong> Es un juego clásico que desafía la lógica y la intuición.
+          Perfecto para medir capacidades cognitivas en pocos minutos, sin necesidad de gráficos complejos.
+        </p>
+        <p>
+          <strong>¿Cómo se juega?</strong> La computadora elige un número secreto del 1 al 100.
+          Tienes 7 intentos para adivinarlo. Después de cada intento, recibirás una pista:
+          "¡Más alto!" o "¡Más bajo!". ¡Ganas si adivinas el número antes de quedarte sin intentos!
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+@if (loading) {
+  <div class="text-center mt-5">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Cargando...</span>
+    </div>
+    <p class="mt-2">Cargando datos de GitHub...</p>
+  </div>
+}
+
+@if (error) {
+  <div class="alert alert-danger mt-5">
+    <i class="bi bi-exclamation-triangle"></i> {{ error }}
+  </div>
+}

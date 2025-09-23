@@ -1,0 +1,36 @@
+<div class="game-container">
+  <h2>Mayor o Menor</h2>
+  <p>Puntaje: {{ puntaje }}</p>
+
+  <div class="vidas">
+    <span *ngFor="let v of [].constructor(vidas)">❤️</span>
+    <span *ngFor="let v of [].constructor(3 - vidas)">🤍</span>
+  </div>
+
+  <div class="cartas">
+    <div>
+      <h3>Carta actual</h3>
+      <app-carta-svg [carta]="actual"></app-carta-svg>
+    </div>
+    <div>
+      <h3>Última carta</h3>
+      <app-carta-svg [carta]="ultima"></app-carta-svg>
+    </div>
+  </div>
+
+  <div class="botones">
+    <button (click)="elegir('menor')">Menor</button>
+    <button (click)="elegir('mayor')">Mayor</button>
+  </div>
+
+  <button class="volver" (click)="volver()">Volver</button>
+</div>
+
+<div class="modal" *ngIf="mostrarGameOver">
+  <div class="modal-content">
+    <h2>Perdiste!</h2>
+    <p>Puntaje final: {{ puntaje }}</p>
+    <button class="reiniciar" (click)="iniciarJuego()">Reiniciar</button>
+    <button class="volver" (click)="volver()">Volver</button>
+  </div>
+</div>

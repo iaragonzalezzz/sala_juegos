@@ -1,0 +1,116 @@
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+  margin: 0;
+  background-image: url('/assets/fondo-animado.gif');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  background-size: cover;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Caja flotante */
+.form-box {
+  background: rgba(0, 0, 0, 0.75);
+  border: 2px solid #00ffe0;
+  border-radius: 16px;
+  padding: 30px;
+  width: 400px;
+  color: white;
+  text-align: center;
+  box-shadow: 0 0 25px rgba(0, 255, 200, 0.7);
+  backdrop-filter: blur(6px);
+  animation: fadeIn 1s ease-in-out;
+}
+
+/* Título */
+.form-box h2 {
+  margin-bottom: 20px;
+  font-size: 26px;
+  color: #00ffe0;
+  text-shadow: 0 0 8px #00ffe0, 0 0 15px #ff00ff;
+}
+
+/* Labels */
+label {
+  font-weight: 600;
+  color: #fff;
+  text-shadow: 0 0 5px #000;
+}
+
+/* Inputs */
+input.form-control {
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid #00ffe0;
+  border-radius: 8px;
+  color: #fff;
+  padding: 10px;
+  margin-bottom: 15px;
+  transition: all 0.3s ease-in-out;
+}
+
+input.form-control:focus {
+  border-color: #ff00ff;
+  box-shadow: 0 0 12px #ff00ff;
+  outline: none;
+}
+
+/* Botón */
+button {
+  background: linear-gradient(90deg, #00ffe0, #ff00ff);
+  border: none;
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease-in-out;
+}
+
+button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px #00ffe0, 0 0 30px #ff00ff;
+}
+
+/* Botones de login rápido */
+.quick-login {
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.quick-login button {
+  flex: 1;
+  padding: 8px;
+  font-size: 14px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid #00ffe0;
+  border-radius: 6px;
+  color: #fff;
+  transition: 0.3s;
+}
+
+.quick-login button:hover {
+  background: #00ffe0;
+  color: #000;
+  box-shadow: 0 0 12px #00ffe0;
+}
+
+/* Animación */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
