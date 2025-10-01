@@ -1,9 +1,18 @@
 {
   "version": 2,
   "builds": [
-    { "src": "angular.json", "use": "@vercel/static-build", "config": { "distDir": "dist/sala-juegos-nuevo" } }
+    {
+      "src": "**/*.ts",
+      "use": "@vercel/angular",
+      "config": { 
+        "buildTarget": "production"
+      }
+    }
   ],
   "routes": [
-    { "src": "/(.*)", "dest": "/index.html" }
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
   ]
 }

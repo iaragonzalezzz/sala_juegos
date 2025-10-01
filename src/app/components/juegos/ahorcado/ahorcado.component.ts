@@ -48,7 +48,7 @@ export class AhorcadoComponent {
 
     if (this.palabra.includes(letra)) {
       this.letrasAdivinadas.add(letra);
-      // ¿ganó?
+      
       if (this.palabra.split('').every(l => this.letrasAdivinadas.has(l))) {
         this.victoria = true;
         this.pararReloj();

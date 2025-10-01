@@ -27,7 +27,7 @@ export class ChatComponent implements OnInit {
   constructor(private router: Router, private chatService: ChatService) {}
 
   async ngOnInit() {
-    // 🔹 Traer usuario logueado de Supabase
+    // traigo user supabase
     const {
       data: { user }
     } = await supabase.auth.getUser();
@@ -36,10 +36,10 @@ export class ChatComponent implements OnInit {
       this.usuario = user.email ?? 'Usuario'; // usamos email o un fallback
     }
 
-    // 🔹 Cargar mensajes
+    // carga msj
     this.mensajes = await this.chatService.obtenerMensajes();
 
-    // 🔹 Escuchar mensajes en tiempo real
+    // mensajes en tiempo real
     this.chatService.escucharMensajes((payload: any) => {
       this.mensajes.push(payload.new);
     });
