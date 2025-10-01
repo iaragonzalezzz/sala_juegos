@@ -1,11 +1,37 @@
-<div class="juegos-container">
-  <div class="card">
-    <h2>Elige un juego</h2>
-    <p>Selecciona una de las opciones para comenzar:</p>
+<div class="home-container">
+  <h2 class="titulo">Juegos</h2>
 
-    <div class="buttons">
-      <a routerLink="/juegos/ahorcado" class="btn-link">Ahorcado</a>
-      <a routerLink="/juegos/mayor-menor" class="btn-link">Mayor o Menor</a>
+  <div class="juegos-grid">
+    <!-- Ahorcado -->
+    <div class="juego-card ahorcado">
+      <img src="assets/icons/ahorcado.png" alt="Ahorcado" class="icono" />
+      <h3>AHORCADO</h3>
+      <p>Juego clásico del ahorcado. Adivina la palabra antes de que se terminen los intentos.</p>
+      <button routerLink="/juegos/ahorcado">JUGAR</button>
+    </div>
+
+    <!-- Mayor o Menor -->
+    <div class="juego-card mayor-menor">
+      <img src="assets/icons/cartas.png" alt="Mayor o Menor" class="icono" />
+      <h3>MAYOR O MENOR</h3>
+      <p>Pon a prueba tu memoria encontrando las parejas de cartas.</p>
+      <button routerLink="/juegos/mayor-menor">JUGAR</button>
+    </div>
+
+    <!-- Preguntados -->
+    <div class="juego-card preguntados">
+      <img src="assets/icons/preguntados.png" alt="Preguntados" class="icono" />
+      <h3>PREGUNTADOS</h3>
+      <p>Contesta las preguntas y demuestra tus conocimientos.</p>
+      <button routerLink="/juegos/preguntados">JUGAR</button>
+    </div>
+
+    <!-- Adivina el número -->
+    <div class="juego-card numero">
+      <img src="assets/icons/numero.png" alt="Adivina el número" class="icono" />
+      <h3>ADIVINA EL NÚMERO</h3>
+      <p>Adivina el número secreto antes de que se acaben los intentos.</p>
+      <button routerLink="/juegos/adivina-numero">JUGAR</button>
     </div>
   </div>
 </div>

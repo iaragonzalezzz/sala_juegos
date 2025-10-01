@@ -1,1 +1,5 @@
-
+.titulo,
+.juego-card h3,
+.juego-card button {
+  font-family: 'Luckiest Guy', cursive;
+}

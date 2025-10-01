@@ -1,0 +1,26 @@
+<div class="box">
+  <h2>Adivina el número</h2>
+  <p>La compu eligió un número entre <b>1 y 100</b>. Tenés <b>{{ intentos }}</b> intentos.</p>
+
+  <div class="input-row" *ngIf="!finalizado">
+    <input type="number" [(ngModel)]="guess" min="1" max="100" placeholder="Tu número..." />
+    <button (click)="probar()">Probar</button>
+  </div>
+
+  <p class="pista" *ngIf="pista">{{ pista }}</p>
+
+  <button class="volver" (click)="volver()">Volver</button>
+</div>
+
+<!-- Modal fin -->
+<div class="modal" *ngIf="mostrarModal">
+  <div class="modal-content">
+    <h3>{{ gano ? '🎉 ¡Ganaste!' : '😢 Fin del juego' }}</h3>
+    <p *ngIf="gano">Puntaje: {{ intentos }} (intentos restantes)</p>
+    <p *ngIf="!gano">El número era: {{ numeroSecreto }}</p>
+    <div class="modal-actions">
+      <button class="primary" (click)="reiniciar()">Reintentar</button>
+      <button (click)="volver()">Volver</button>
+    </div>
+  </div>
+</div>

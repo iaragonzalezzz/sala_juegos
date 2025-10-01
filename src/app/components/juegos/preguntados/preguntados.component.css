@@ -1,0 +1,146 @@
+.preguntados-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 85vh;
+  background: linear-gradient(135deg, #1abc9c, #3498db);
+  background-image: url('/assets/preguntados.jpg');
+  background-position: center center;
+  background-attachment: fixed;
+  background-size: cover;
+  font-family: 'Fredoka One', cursive;
+}
+
+
+.preguntados-card {
+  background: #2c2c2c;
+  padding: 2rem;
+  border-radius: 20px;
+  width: 600px;
+  text-align: center;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+  color: white;
+  font-family: 'Fredoka One', cursive;
+}
+
+
+.titulo {
+  font-size: 2rem;
+  font-family: 'Fredoka One', cursive;
+  margin-bottom: 10px;
+}
+
+
+.categoria {
+  display: inline-block;
+  color: white;
+  font-weight: bold;
+  padding: 8px 20px;
+  font-family: 'Fredoka One', cursive;
+  border-radius: 25px;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  font-size: 1rem;
+}
+
+
+.pregunta-card {
+  margin: 20px 0;
+  font-family: 'Fredoka One', cursive;
+}
+
+.pregunta {
+  font-size: 1.5rem;
+  font-family: 'Fredoka One', cursive;
+  font-weight: bold;
+}
+
+
+.opciones {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  font-family: 'Fredoka One', cursive;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.opciones button {
+  background: linear-gradient(135deg, #00c6ff, #0072ff);
+  color: white;
+  border: none;
+  border-radius: 15px;
+  font-family: 'Fredoka One', cursive;
+  padding: 15px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s, background 0.3s;
+}
+
+.opciones button:hover {
+  transform: scale(1.05);
+  background: linear-gradient(135deg, #0072ff, #00c6ff);
+  font-family: 'Fredoka One', cursive;
+}
+
+button.correcta {
+  background: #2ecc71 !important;
+}
+
+button.incorrecta {
+  background: #e74c3c !important;
+}
+
+
+.timer {
+  font-size: 1.2rem;
+  margin: 10px 0;
+  font-weight: bold;
+}
+
+
+.info {
+  margin-top: 15px;
+  font-size: 1rem;
+  color: #ddd;
+  font-family: 'Fredoka One', cursive;
+}
+
+
+.gameover {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 85vh;
+  background: linear-gradient(135deg, #8e44ad, #3498db);
+  font-family: 'Fredoka One', cursive;
+}
+
+.gameover-card {
+  background: #2c2c2c;
+  padding: 2rem;
+  border-radius: 20px;
+  text-align: center;
+  color: white;
+  width: 400px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+  font-family: 'Fredoka One', cursive;
+}
+
+.btn-reiniciar {
+  margin-top: 15px;
+  background: linear-gradient(135deg, #ff9f43, #ff6b6b);
+  border: none;
+  font-family: 'Mikado', sans-serif;
+  padding: 12px 20px;
+  border-radius: 10px;
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  font-family: 'Fredoka One', cursive;
+}
+
+.btn-reiniciar:hover {
+  transform: scale(1.05);
+}

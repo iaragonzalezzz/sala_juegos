@@ -1,0 +1,44 @@
+<div class="preguntados-container" *ngIf="!mostrarGameOver">
+  <div class="preguntados-card">
+    <h2 class="titulo">Preguntados</h2>
+
+    <div class="categoria" [style.background]="getColorCategoria(preguntas[i]?.categoria || '')">
+      {{ preguntas[i]?.categoria }}
+    </div>
+
+    <div class="timer">
+     Tiempo restante: {{ tiempoRestante }}s
+    </div>
+
+
+    <div class="pregunta-card">
+      <h3 class="pregunta">{{ preguntas[i]?.pregunta }}</h3>
+    </div>
+
+
+    <div class="opciones">
+      <button 
+        *ngFor="let op of preguntas[i]?.opciones" 
+        (click)="elegir(op)"
+        [ngClass]="{
+          'correcta': finalizado && op === correcta,
+          'incorrecta': finalizado && op === elegida && op !== correcta
+        }">
+        {{ op }}
+      </button>
+    </div>
+
+    <div class="info">
+      <p>Pregunta {{ i+1 }} de {{ total }}</p>
+      <p>Puntaje: {{ puntaje }}</p>
+    </div>
+  </div>
+</div>
+
+<div class="gameover" *ngIf="mostrarGameOver">
+  <div class="gameover-card">
+    <h2>¡Juego Terminado!</h2>
+    <p>Tu puntaje final fue: <strong>{{ puntaje }}</strong> / {{ total }}</p>
+    <button class="btn-reiniciar" (click)="reiniciar()">Jugar de nuevo</button>
+  </div>
+</div>

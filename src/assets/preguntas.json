@@ -1,0 +1,38 @@
+[
+  {
+    "categoria": "Geografía",
+    "pregunta": "¿Cuál es la capital de Francia?",
+    "opciones": ["Madrid", "París", "Londres", "Roma"],
+    "respuesta": "París"
+  },
+  {
+    "categoria": "Ciencia",
+    "pregunta": "¿Qué significa H2O?",
+    "opciones": ["Oxígeno", "Agua", "Hidrógeno", "Helio"],
+    "respuesta": "Agua"
+  },
+  {
+    "categoria": "Historia",
+    "pregunta": "¿Quién fue el primer presidente de EE.UU.?",
+    "opciones": ["Lincoln", "George Washington", "Jefferson", "Roosevelt"],
+    "respuesta": "George Washington"
+  },
+  {
+    "categoria": "Arte",
+    "pregunta": "¿Quién pintó la Mona Lisa?",
+    "opciones": ["Leonardo da Vinci", "Picasso", "Van Gogh", "Miguel Ángel"],
+    "respuesta": "Leonardo da Vinci"
+  },
+  {
+    "categoria": "Deportes",
+    "pregunta": "¿Cuántos jugadores hay en un equipo de fútbol?",
+    "opciones": ["9", "10", "11", "12"],
+    "respuesta": "11"
+  },
+  {
+    "categoria": "Entretenimiento",
+    "pregunta": "¿Quién interpreta a Iron Man en el MCU?",
+    "opciones": ["Chris Evans", "Robert Downey Jr.", "Tom Holland", "Mark Ruffalo"],
+    "respuesta": "Robert Downey Jr."
+  }
+]

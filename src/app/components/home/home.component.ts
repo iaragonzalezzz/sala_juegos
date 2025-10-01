@@ -11,10 +11,10 @@ import { AuthService } from '../../core/auth.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
-  user$; // observable del usuario
+  user$; 
 
   constructor(private auth: AuthService, private router: Router) {
-    this.user$ = this.auth.user$; // nos suscribimos al observable del servicio
+    this.user$ = this.auth.user$; 
   }
 
   async logout() {

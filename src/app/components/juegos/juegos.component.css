@@ -1,83 +1,101 @@
-:host {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  width: 100%;
-  margin: 0;
-  background-image: url('/assets/fondo-animado.gif');
+/* Fondo futurista */
+.home-container {
+  text-align: center;
+  padding: 2rem;
+  background: #000;
+  color: #fff;
+  min-height: 100vh;
+  background: url("https://www.transparenttextures.com/patterns/cubes.png");
+  background-image: url('/assets/juegos.gif');
   background-repeat: no-repeat;
   background-position: center center;
   background-attachment: fixed;
   background-size: cover;
-  font-family: 'Poppins', sans-serif;
+  background-size: cover;
 }
 
-.juegos-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-}
-
-.card {
-  background: rgba(0, 0, 0, 0.75);
-  border: 2px solid #00ffe0;
-  border-radius: 16px;
-  padding: 40px;
-  width: 500px;
-  text-align: center;
-  color: white;
-  box-shadow: 0 0 25px rgba(0, 255, 200, 0.7);
-  backdrop-filter: blur(6px);
-  animation: fadeIn 1s ease-in-out;
-}
-
-.card h2 {
-  margin-bottom: 15px;
-  font-size: 28px;
-  color: #00ffe0;
-  text-shadow: 0 0 8px #00ffe0, 0 0 15px #ff00ff;
-}
-
-.card p {
-  margin-bottom: 25px;
-  font-size: 16px;
-  color: #ddd;
-}
-
-.buttons {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-.btn-link {
-  display: inline-block;
-  text-decoration: none;
-  text-align: center;
-  padding: 15px 25px;
-  border-radius: 10px;
-  font-size: 18px;
-  font-weight: bold;
+.titulo {
+  font-size: 3rem;
+  margin-bottom: 2rem;
+  font-family: 'Fredoka One', cursive;
   color: #fff;
-  background: linear-gradient(90deg, #00ffe0, #ff00ff);
-  transition: all 0.3s ease-in-out;
-  box-shadow: 0 0 10px rgba(255, 0, 255, 0.6);
+  font-weight: bold;
 }
 
-.btn-link:hover {
-  transform: scale(1.1);
-  box-shadow: 0 0 20px #00ffe0, 0 0 30px #ff00ff;
+/* Grid */
+.juegos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: scale(0.9);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+/* Card */
+.juego-card {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 0 25px rgba(0, 255, 255, 0.2);
+  transition: transform 0.3s, box-shadow 0.3s;
+  text-align: center;
+   font-family: 'Fredoka One', cursive
+}
+
+.juego-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 0 30px rgba(255, 0, 255, 0.5);
+}
+
+/* Icono */
+.icono {
+  width: 70px;
+  margin-bottom: 1rem;
+}
+
+/* Títulos */
+.juego-card h3 {
+  font-size: 1.5rem;
+  color: #000;
+  margin-bottom: 0.8rem;
+  text-transform: uppercase;
+  font-family: 'Fredoka One', cursive
+}
+
+.juego-card p {
+  font-size: 0.9rem;
+  color: #000;
+  min-height: 60px;
+  margin-bottom: 1rem;
+  font-family: 'Fredoka One', cursive
+}
+
+/* Botón */
+.juego-card button {
+  background: linear-gradient(135deg, #ff00ff, #ff0077);
+  border: none;
+  padding: 0.8rem 2rem;
+  border-radius: 25px;
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.juego-card button:hover {
+  background: linear-gradient(135deg, #ff33ff, #ff3399);
+  transform: scale(1.05);
+}
+
+/* Colores individuales */
+.ahorcado {
+  border-top: 5px solid #8e44ad;
+}
+.mayor-menor {
+  border-top: 5px solid #e84393;
+}
+.preguntados {
+  border-top: 5px solid #00cec9;
+}
+.numero {
+  border-top: 5px solid #55efc4;
 }

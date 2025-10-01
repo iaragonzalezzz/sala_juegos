@@ -4,20 +4,23 @@
   padding: 20px;
   border-radius: 12px;
   width: 400px;
-  margin: 20px auto;
+  margin: 15px auto;
   text-align: center;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+  font-family: 'Fredoka One', cursive;
 }
 
 .vidas {
   font-size: 1.8rem;
   margin: 10px 0;
+  font-family: 'Fredoka One', cursive;
 }
 
 .cartas {
   display: flex;
   justify-content: space-around;
-  margin: 20px 0;
+  margin: 15px 0;
+  font-family: 'Fredoka One', cursive;
 }
 
 .botones {
@@ -33,6 +36,7 @@ button {
   border-radius: 6px;
   cursor: pointer;
   font-weight: bold;
+  font-family: 'Fredoka One', cursive;
 }
 
 button:hover {
@@ -42,14 +46,15 @@ button:hover {
 .volver {
   background: linear-gradient(to right, #ff416c, #ff4b2b);
   color: white;
+  font-family: 'Fredoka One', cursive;
 }
 
 .reiniciar {
   background: linear-gradient(to right, #00c6ff, #0072ff);
   color: white;
+  font-family: 'Fredoka One', cursive;
 }
 
-/* 🎯 Modal */
 .modal {
   position: fixed;
   top: 0;
@@ -60,6 +65,7 @@ button:hover {
   display: flex;
   align-items: center;
   justify-content: center;
+  font-family: 'Fredoka One', cursive;
 }
 
 .modal-content {
@@ -70,4 +76,5 @@ button:hover {
   color: white;
   width: 300px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  font-family: 'Fredoka One', cursive;
 }

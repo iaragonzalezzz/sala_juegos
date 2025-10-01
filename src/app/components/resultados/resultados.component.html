@@ -1,0 +1,81 @@
+<div class="resultado-card">
+  <h3>AHORCADO</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Jugador</th>
+        <th>Puntaje</th>
+        <th>Fecha</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let r of ahorcado">
+        <td>{{ r.usuario }}</td>
+        <td>{{ r.puntaje }}</td>
+        <td>{{ r.fecha }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="resultado-card">
+  <h3>MAYOR O MENOR</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Jugador</th>
+        <th>Puntaje</th>
+        <th>Fecha</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let r of mayorMenor">
+        <td>{{ r.usuario }}</td>
+        <td>{{ r.puntaje }}</td>
+        <td>{{ r.fecha }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="resultado-card">
+  <h3>PREGUNTADOS</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Jugador</th>
+        <th>Puntaje</th>
+        <th>Total</th>
+        <th>Fecha</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let r of preguntados">
+        <td>{{ r.usuario }}</td>
+        <td>{{ r.puntaje }}</td>
+        <td>{{ r.total }}</td>
+        <td>{{ r.fecha }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="resultado-card">
+  <h3>ADIVINA EL NÚMERO</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Jugador</th>
+        <th>Puntaje</th>
+        <th>Fecha</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let r of adivinaNumero">
+        <td>{{ r.usuario }}</td>
+        <td>{{ r.puntaje }}</td>
+        <td>{{ r.fecha }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
