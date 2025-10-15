@@ -6,6 +6,6 @@ import { routes } from './app.routes'; // tus rutas
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
-    provideAnimations() // 🔹 habilita animaciones
+    provideAnimations() 
   ]
 };

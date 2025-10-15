@@ -4,7 +4,6 @@
 
   <div *ngIf="cargando">Cargando resultados...</div>
 
-  <!-- Grid de cards -->
   <div *ngIf="!cargando && resultados.length > 0" class="cards-grid">
     <div *ngFor="let r of resultados" class="card">
       <h3>{{ r.nombre_apellido }}</h3>

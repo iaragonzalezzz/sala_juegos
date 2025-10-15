@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from '../../core/auth.service'; // 👈 este es el servicio Auth nuevo, no AuthService
+import { AuthService } from '../../core/auth.service'; 
 
 @Component({
   selector: 'app-registro',
@@ -74,7 +74,6 @@ export class RegistroComponent {
     return true;
   }
 
-  /** ✅ Agregado: limpia el formulario */
   onReset() {
     this.usuario = {
       nombre: '',
@@ -86,7 +85,6 @@ export class RegistroComponent {
     };
   }
 
-  /** ✅ Agregado: cierra el modal */
   cerrarModal() {
     this.mostrarModal = false;
     if (this.exito) this.router.navigate(['/login']);

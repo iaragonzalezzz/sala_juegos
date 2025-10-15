@@ -45,11 +45,11 @@
     </form>
   </div>
 
-<!-- Modal de mensaje -->
+
 <div *ngIf="mostrarModal" class="modal-overlay">
   <div class="modal">
     <h3 [ngClass]="{ 'success': exito, 'error': !exito }">
-      {{ exito ? '✅ Registro exitoso' : '⚠️ Aviso' }}
+      {{ exito ? 'Registro exitoso' : 'Aviso' }}
     </h3>
     <p>{{ mensajeModal }}</p>
     <button class="close-btn" (click)="cerrarModal()">Cerrar</button>

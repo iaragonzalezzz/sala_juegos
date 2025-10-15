@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { Router } from '@angular/router';
 import { supabase } from '../../../core/supabase.client';
 import { AuthService } from '../../../core/auth.service';
 import { SalaChat } from '../chat/sala-chat';
@@ -33,7 +34,8 @@ export class PreguntadosComponent implements OnInit {
 
   constructor(
     private http: HttpClient,
-    private auth: AuthService
+    private auth: AuthService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -91,7 +93,6 @@ export class PreguntadosComponent implements OnInit {
     this.iniciarTimer();
   }
 
-  /** ✅ Agregamos el método que tu HTML usa */
   getColorCategoria(categoria: string): string {
     if (!categoria) return '#9e9e9e';
     switch (categoria.toLowerCase()) {
@@ -112,5 +113,8 @@ export class PreguntadosComponent implements OnInit {
       { usuario, puntaje: this.puntaje, fecha }
     ]);
     if (error) console.error('Error al guardar resultado:', error.message);
+  }
+  volver() {
+    this.router.navigate(['/juegos']);
   }
 }

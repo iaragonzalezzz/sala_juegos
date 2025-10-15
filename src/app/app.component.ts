@@ -12,12 +12,12 @@ import { trigger, transition, style, animate, query } from '@angular/animations'
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
   animations: [
-    // Animación para botones
+    //animacion para botones
     trigger('botonAnimacion', [
       transition(':enter, :leave', []), // no afecta rutas
     ]),
 
-    // Animación de transición entre rutas
+    //animacion de transición entre rutas
     trigger('routeAnimations', [
       transition('* <=> *', [
         query(':enter, :leave', [
@@ -54,17 +54,16 @@ export class AppComponent implements OnInit {
     });
   }
 
-  // Navegación de botones
   goToEncuesta() { this.router.navigate(['/encuesta']); }
   goToResultadosEncuesta() { this.router.navigate(['/resultados-encuestas']); }
   goToRanking() { this.router.navigate(['/resultados']); }
   goToQuienSoy() { this.router.navigate(['/quien-soy']); }
 
-  // Animaciones de botones
+  //animaciones de botones
   onMouseEnter(boton: string) { this.estadoBotones[boton] = 'hover'; }
   onMouseLeave(boton: string) { this.estadoBotones[boton] = 'normal'; }
 
-  // Conecta animación con router-outlet
+  //animación con router-outlet
   prepareRoute(outlet: RouterOutlet) {
     return outlet?.activatedRouteData?.['animation'] || null;
   }

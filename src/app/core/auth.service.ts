@@ -9,35 +9,34 @@ export class AuthService {
   user$ = new BehaviorSubject<any>(null);
 
   constructor() {
-    // 🔹 Crear cliente global de Supabase
+    //crear cliente global de Supabase
     this.supabase = createClient(
       environment.supabaseUrl,
       environment.supabaseAnonKey
     );
 
-    // 🔹 Cargar usuario inicial
+    //cargar usuario inicial
     this.loadUser();
 
-    // 🔹 Detectar login / logout en tiempo real
+    //setectar login / logout en tiempo real
     this.supabase.auth.onAuthStateChange((_event, session) => {
       const user = session?.user || null;
       this.user$.next(user);
       if (user) {
-        console.log('🟢 Sesión activa:', user.email);
+        console.log('Sesión activa:', user.email);
         localStorage.setItem('user', JSON.stringify(user));
       } else {
-        console.log('🔴 Sesión cerrada');
+        console.log('Sesión cerrada');
         localStorage.removeItem('user');
       }
     });
   }
 
-  // =====================================================
-  // 📥 Registrar usuario nuevo
-  // =====================================================
+
+  //registra usuario nuevo
   async registrarUsuario(nombre: string, email: string, password: string, apellido?: string, edad?: number) {
     try {
-      // 🔸 Combinar nombre y apellido si se pasa por separado
+      //combina nombre y apellido si se pasa por separado
       const nombreCompleto = apellido ? `${nombre} ${apellido}` : nombre;
 
       const { data, error } = await this.supabase.auth.signUp({
@@ -46,7 +45,7 @@ export class AuthService {
         options: {
           data: {
             nombre: nombreCompleto,
-            edad: edad || null, // opcional
+            edad: edad || null, 
           },
         },
       });
@@ -61,9 +60,8 @@ export class AuthService {
     }
   }
 
-  // =====================================================
-  // 🔐 Iniciar sesión
-  // =====================================================
+
+  //inicia sesión
   async signIn(email: string, password: string) {
     try {
       const { data, error } = await this.supabase.auth.signInWithPassword({
@@ -74,17 +72,16 @@ export class AuthService {
       if (error) throw error;
 
       this.user$.next(data.user);
-      console.log('✅ Inicio de sesión exitoso:', data.user.email);
+      console.log('Inicio de sesión exitoso:', data.user.email);
       return { success: true, data };
     } catch (err: any) {
-      console.error('⚠️ Error al iniciar sesión:', err.message);
+      console.error('Error al iniciar sesión:', err.message);
       return { success: false, error: this.getErrorMessage(err.message) };
     }
   }
 
-  // =====================================================
-  // 🚪 Cerrar sesión
-  // =====================================================
+
+  //cerrar sesión
   async signOut() {
     try {
       const { error } = await this.supabase.auth.signOut();
@@ -98,9 +95,8 @@ export class AuthService {
     }
   }
 
-  // =====================================================
-  // 👤 Obtener usuario actual
-  // =====================================================
+  //obtiene usuario actual
+
   async getUser() {
     try {
       const { data, error } = await this.supabase.auth.getUser();
@@ -111,20 +107,20 @@ export class AuthService {
     }
   }
 
-  // =====================================================
-  // 🔄 Cargar usuario actual (al iniciar la app)
-  // =====================================================
+
+  //cargar usuario actual 
+
   async loadUser() {
     const { data } = await this.supabase.auth.getUser();
     this.user$.next(data.user);
   }
 
- // 👑 Verificar si el usuario es admin
+ //verificar si el usuario es admin
   async isAdmin(): Promise<boolean> {
     const user = this.user$.value;
     if (!user) return false;
 
-    // 🔹 Buscar el perfil completo en la tabla profiles
+    //busca el perfil completo en la tabla profiles
     const { data, error } = await this.supabase
       .from('profiles')
       .select('isAdmin')
@@ -136,7 +132,7 @@ export class AuthService {
     return data.isAdmin === true;
   }
 
-  // Dentro de la clase AuthService
+  //dentro de la clase AuthService
   async obtenerEncuestas() {
     try {
       const { data, error } = await this.supabase
@@ -155,10 +151,7 @@ export class AuthService {
     }
   }
 
-
-  // =====================================================
-  // 🧠 Mensajes de error legibles
-  // =====================================================
+  //mensajes de error legibles
   private getErrorMessage(msg: string): string {
     if (msg.includes('already registered')) return 'Este email ya está registrado.';
     if (msg.includes('invalid email')) return 'El email ingresado es inválido.';

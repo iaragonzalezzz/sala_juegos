@@ -36,13 +36,22 @@ export class LoginComponent {
   async submit() {
     this.errorMsg = '';
     if (this.form.invalid) return;
+
     this.loading = true;
+    const { email, password } = this.form.value as any;
+
     try {
-      const { email, password } = this.form.value as any;
-      await this.auth.signIn(email, password);
+      const result = await this.auth.signIn(email, password);
+
+      if (!result.success) {
+        this.errorMsg = result.error || 'Email o contraseña incorrectos';
+        return;
+      }
+
       this.router.navigate(['/home']);
-    } catch (e: any) {
-      this.errorMsg = e.message ?? 'Error al iniciar sesión';
+    } catch (err: any) {
+      this.errorMsg = err.message ?? 'Ocurrió un error inesperado';
+      console.error('Error login:', this.errorMsg);
     } finally {
       this.loading = false;
     }
@@ -52,6 +61,8 @@ export class LoginComponent {
     this.form.setValue({ email: u.email, password: u.password });
     await this.submit();
   }
+
+  cerrarError() {
+    this.errorMsg = '';
+  }
 }
-
-

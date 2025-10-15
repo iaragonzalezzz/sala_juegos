@@ -1,8 +1,7 @@
 <div class="ranking-container">
   <div class="overlay">
-    <h2>🏆 Ranking de Puntuaciones</h2>
+    <h2>Ranking de Puntuaciones</h2>
 
-    <!-- Selector de juego -->
     <div class="selector">
       <label for="juegoSelect">Seleccioná un juego:</label>
       <select id="juegoSelect" [(ngModel)]="juegoSeleccionado" (change)="filtrarJuego()">
@@ -11,20 +10,17 @@
       </select>
     </div>
 
-    <!-- Loading -->
     <div *ngIf="cargando" class="cargando">Cargando...</div>
 
-    <!-- Rankings -->
     <ng-container *ngIf="!cargando">
       <div
         *ngFor="let juego of juegos"
         class="tabla-container"
         [hidden]="juegoSeleccionado !== 'Todos' && juegoSeleccionado !== juego"
       >
-        <!-- 🎮 título del juego -->
-        <h3>🎮 {{ juego }}</h3>
 
-        <!-- Lista de resultados -->
+        <h3>{{ juego }}</h3>
+
         <ng-container *ngIf="resultadosPorJuego(juego) as lista">
           <table *ngIf="lista.length > 0">
             <thead>

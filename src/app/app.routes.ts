@@ -1,4 +1,3 @@
-// src/app/app.routes.ts
 import { Routes } from '@angular/router';
 
 import { HomeComponent } from './components/home/home.component';
@@ -13,11 +12,9 @@ import { PreguntadosComponent } from './components/juegos/preguntados/preguntado
 import { AdivinaNumeroComponent } from './components/juegos/adivina-numero/adivina-numero.component';
 import { ResultadosComponent } from './components/resultados/resultados.component';
 
-// 👇 Importa los guards
-import { AuthGuard } from './core/auth.guard';
-import { AdminGuard } from './core/admin.guard'; // ✅ Nuevo
 
-// 👇 Importa los nuevos componentes
+import { AuthGuard } from './core/auth.guard';
+import { AdminGuard } from './core/admin.guard'; 
 import { EncuestaComponent } from './components/encuesta/encuesta.component';
 import { ResultadosEncuestaComponent } from './components/resultados-encuestas/resultados-encuestas.component';
 
@@ -30,7 +27,7 @@ export const routes: Routes = [
   { path: 'quien-soy', component: QuienSoyComponent },
 
 
-  // 🔐 Rutas protegidas (solo logueados)
+  //(solo logueados)
   { path: 'juegos', component: JuegosComponent, canActivate: [AuthGuard] },
   { path: 'juegos/ahorcado', component: AhorcadoComponent, canActivate: [AuthGuard] },
   { path: 'juegos/mayor-menor', component: MayorMenorComponent, canActivate: [AuthGuard] },
@@ -40,7 +37,7 @@ export const routes: Routes = [
   { path: 'resultados', component: ResultadosComponent, canActivate: [AuthGuard] },
   { path: 'encuesta', component: EncuestaComponent, canActivate: [AuthGuard] }, // ✅ Nueva ruta
 
-  // 👮 Rutas solo para administradores
+  //(solo para administradores)
   { path: 'resultados-encuestas', component: ResultadosEncuestaComponent, canActivate: [AdminGuard] }, // ✅ Nueva ruta
 
   { path: '**', redirectTo: 'home' }

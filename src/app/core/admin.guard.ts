@@ -12,12 +12,12 @@ export class AdminGuard implements CanActivate {
     const user = await this.auth.getUser();
 
     if (!user) {
-      // Si no hay usuario logueado, redirigir al login
+      //si no hay usuario logueado, redirigir al login
       this.router.navigate(['/login']);
       return false;
     }
 
-    // Verificar si es admin usando tu método actualizado
+    //verifica si es admin usando tu método actualizado
     const esAdmin = await this.auth.isAdmin();
     if (!esAdmin) {
       // Si no es admin, redirigir a otra página (por ej. home)
@@ -25,6 +25,6 @@ export class AdminGuard implements CanActivate {
       return false;
     }
 
-    return true; // Usuario es admin, puede pasar
+    return true; //usuario es admin, puede pasar
   }
 }

@@ -15,7 +15,7 @@
 <!-- Modal fin -->
 <div class="modal" *ngIf="mostrarModal">
   <div class="modal-content">
-    <h3>{{ gano ? '🎉 ¡Ganaste!' : '😢 Fin del juego' }}</h3>
+    <h3>{{ gano ? '¡Ganaste!' : 'Fin del juego' }}</h3>
     <p *ngIf="gano">Puntaje: {{ intentos }} (intentos restantes)</p>
     <p *ngIf="!gano">El número era: {{ numeroSecreto }}</p>
     <div class="modal-actions">

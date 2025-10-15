@@ -36,14 +36,14 @@ export class AdivinaNumeroComponent {
     if (this.guess === this.numeroSecreto) {
       this.gano = true;
       this.finalizado = true;
-      this.pista = '🎉 ¡Adivinaste!';
+      this.pista = '¡Adivinaste!';
       this.mostrarModal = true;
       this.guardarResultado();
       return;
     }
 
     this.intentos--;
-    this.pista = this.guess < this.numeroSecreto ? '⬆️ Más alto' : '⬇️ Más bajo';
+    this.pista = this.guess < this.numeroSecreto ? 'Más alto' : 'Más bajo';
 
     if (this.intentos === 0) {
       this.finalizado = true;

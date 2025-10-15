@@ -9,14 +9,12 @@
     <h3 class="pregunta">{{ preguntas[i].pregunta }}</h3>
 
     <div class="timer">
-     Tiempo restante: {{ tiempoRestante }}s
+      Tiempo restante: {{ tiempoRestante }}s
     </div>
-
 
     <div class="pregunta-card">
       <h3 class="pregunta">{{ preguntas[i].pregunta }}</h3>
     </div>
-
 
     <div class="opciones">
       <button 
@@ -34,6 +32,9 @@
       <p>Pregunta {{ i+1 }} de {{ total }}</p>
       <p>Puntaje: {{ puntaje }}</p>
     </div>
+
+    <!-- Botón Volver -->
+    <button class="btn-volver" (click)="volver()">Volver</button>
   </div>
 </div>
 
@@ -42,6 +43,8 @@
     <h2>¡Juego Terminado!</h2>
     <p>Tu puntaje final fue: <strong>{{ puntaje }}</strong> / {{ total }}</p>
     <button class="btn-reiniciar" (click)="reiniciar()">Jugar de nuevo</button>
+    <button class="btn-volver" (click)="volver()">Volver</button>
   </div>
 </div>
+
 <app-sala-chat></app-sala-chat>

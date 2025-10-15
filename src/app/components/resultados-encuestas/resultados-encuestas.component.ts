@@ -34,8 +34,6 @@ export class ResultadosEncuestaComponent implements OnInit {
       this.cargando = true;
       const { data, error } = await supabase.from('encuestas').select('*');
       if (error) throw error;
-
-      // Normalizamos los datos
       this.resultados = (data || []).map((r: any) => ({
         id: r.id,
         usuario_id: r.usuario_id,

@@ -8,25 +8,19 @@ export class ChatService {
   private conectado = false;
 
   constructor(private auth: AuthService, private zone: NgZone) {
-    // 🔄 Detectar cambios de sesión en tiempo real
+    //detecta cambios de sesión en tiempo real
     this.auth.user$.subscribe(() => {
       console.log('🔄 Sesión actualizada, reiniciando canal...');
       this.reiniciarCanal();
     });
   }
-
-  // =====================================================
-  // 📩 Obtener usuario actual o "Anónimo"
-  // =====================================================
+  //obtiene usuario actual o "Anónimo"
   async obtenerUsuario(): Promise<string> {
     const user = this.auth.user$.value; // usamos BehaviorSubject en lugar de llamar siempre a Supabase
     if (user && user.email) return user.email;
     return 'Anónimo';
   }
 
-  // =====================================================
-  // 📜 Obtener los últimos 10 mensajes guardados
-  // =====================================================
   async obtenerMensajes() {
     const { data, error } = await supabase
       .from('mensajes_global')
@@ -38,9 +32,7 @@ export class ChatService {
     return { data: data ? data.reverse() : [], error };
   }
 
-  // =====================================================
-  // ✉️ Enviar mensaje nuevo
-  // =====================================================
+
   async enviarMensaje(texto: string): Promise<void> {
     const usuario = await this.obtenerUsuario();
     const fecha = new Date().toISOString();
@@ -49,12 +41,9 @@ export class ChatService {
       { usuario, mensaje: texto, fecha },
     ]);
 
-    if (error) console.error('⚠️ Error enviando mensaje:', error);
+    if (error) console.error('Error enviando mensaje:', error);
   }
 
-  // =====================================================
-  // 🔔 Suscribirse a mensajes en tiempo real
-  // =====================================================
   suscribirse(callback: (nuevo: any) => void) {
     if (this.canal) this.desuscribirse();
 
@@ -75,28 +64,21 @@ export class ChatService {
       });
   }
 
-  // =====================================================
-  // ❌ Cancelar suscripción
-  // =====================================================
   desuscribirse() {
     if (this.canal) {
-      console.log('❌ Canal cerrado.');
+      console.log('Canal cerrado.');
       supabase.removeChannel(this.canal);
       this.canal = null;
       this.conectado = false;
     }
   }
 
-  // =====================================================
-  // 🔁 Reiniciar canal al cambiar sesión
-  // =====================================================
   private reiniciarCanal() {
     this.desuscribirse();
 
-    // Esperar un poco para que Supabase actualice sesión
     setTimeout(() => {
       this.suscribirse((nuevo: any) => {
-        console.log('💬 Nuevo mensaje recibido tras reinicio:', nuevo);
+        console.log('Nuevo mensaje recibido tras reinicio:', nuevo);
       });
     }, 500);
   }
