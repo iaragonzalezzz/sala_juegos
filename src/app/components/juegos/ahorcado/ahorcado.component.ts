@@ -1,11 +1,14 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { supabase } from '../../../core/supabase.client';
+import { AuthService } from '../../../core/auth.service';
+import { SalaChat } from '../chat/sala-chat';
 
 @Component({
   selector: 'app-ahorcado',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, SalaChat],
   templateUrl: './ahorcado.component.html',
   styleUrls: ['./ahorcado.component.css']
 })
@@ -15,18 +18,17 @@ export class AhorcadoComponent {
   palabra = '';
   letrasAdivinadas = new Set<string>();
   letrasIncorrectas = new Set<string>();
-
-  // estado
-  errores = 0;             // controla el dibujo
-  maxErrores = 6;          // cabeza, cuerpo, brazo izq, brazo der, pierna izq, pierna der
+  errores = 0;
+  maxErrores = 6;
   victoria = false;
   derrota = false;
-
-  // temporizador (1 minuto)
   tiempo = 60;
   private intervalo?: any;
 
-  constructor(private router: Router) {
+  constructor(
+    private router: Router,
+    private auth: AuthService
+  ) {
     this.reiniciar();
   }
 
@@ -48,10 +50,10 @@ export class AhorcadoComponent {
 
     if (this.palabra.includes(letra)) {
       this.letrasAdivinadas.add(letra);
-      
       if (this.palabra.split('').every(l => this.letrasAdivinadas.has(l))) {
         this.victoria = true;
         this.pararReloj();
+        this.guardarResultado();
       }
     } else {
       this.letrasIncorrectas.add(letra);
@@ -59,8 +61,18 @@ export class AhorcadoComponent {
       if (this.errores >= this.maxErrores) {
         this.derrota = true;
         this.pararReloj();
+        this.guardarResultado();
       }
     }
+  }
+
+  async guardarResultado() {
+    const usuario = this.auth.user$.value?.email || 'Anónimo';
+    const puntaje = this.victoria ? this.tiempo : 0;
+    const fecha = new Date().toISOString();
+
+    const { error } = await supabase.from('resultados_ahorcado').insert([{ usuario, puntaje, fecha }]);
+    if (error) console.error('Error al guardar resultado:', error.message);
   }
 
   reiniciar() {
@@ -87,6 +99,7 @@ export class AhorcadoComponent {
         this.tiempo = 0;
         this.derrota = true;
         this.pararReloj();
+        this.guardarResultado();
       }
     }, 1000);
   }
@@ -98,6 +111,3 @@ export class AhorcadoComponent {
     }
   }
 }
-
-
-

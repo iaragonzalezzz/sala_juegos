@@ -1,51 +1,83 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SupabaseService } from '../../core/supabase.service';
+import { FormsModule } from '@angular/forms';
+import { supabase } from '../../core/supabase.client';
+import { ResaltarTopDirective } from '../../directives/resaltar-top.directive';
+import { FiltroJuegoPipe } from '../../pipes/filtro-juego.pipe';
 
 interface Resultado {
   usuario: string;
   puntaje: number;
-  total?: number; // solo para Preguntados
-  fecha: string;
+  juego: string;
+  fecha?: string;
 }
 
 @Component({
   selector: 'app-resultados',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule, ResaltarTopDirective],
+  providers: [FiltroJuegoPipe],
   templateUrl: './resultados.component.html',
   styleUrls: ['./resultados.component.css']
 })
 export class ResultadosComponent implements OnInit {
-  ahorcado: Resultado[] = [];
-  mayorMenor: Resultado[] = [];
-  preguntados: Resultado[] = [];
-  adivinaNumero: Resultado[] = [];
+  resultados: Resultado[] = [];
+  cargando = true;
 
-  constructor(private supabase: SupabaseService) {}
+  juegos = ['Ahorcado', 'Mayor o Menor', 'Preguntados', 'Propio'];
+  juegoSeleccionado = 'Todos';
+
+  constructor(private filtroJuegoPipe: FiltroJuegoPipe) {}
 
   async ngOnInit() {
-    this.ahorcado = await this.obtenerResultados('resultados_ahorcado');
-    this.mayorMenor = await this.obtenerResultados('resultados_mayor_menor');
-    this.preguntados = await this.obtenerResultados('resultados_preguntados');
-    this.adivinaNumero = await this.obtenerResultados('resultados_propio');
+    await this.cargarResultados();
   }
 
-  private async obtenerResultados(tabla: string): Promise<Resultado[]> {
+  async cargarResultados() {
     try {
-      const data = await this.supabase.obtener(tabla);
-      console.log("Datos de", tabla, data); // 👀 Para debug
+      this.cargando = true;
 
-      return data.map((r: any) => ({
+      const ahorcado = await this.obtenerResultadosDe('resultados_ahorcado', 'Ahorcado');
+      const mayorMenor = await this.obtenerResultadosDe('resultados_mayor_menor', 'Mayor o Menor');
+      const preguntados = await this.obtenerResultadosDe('resultados_preguntados', 'Preguntados');
+      const propio = await this.obtenerResultadosDe('resultados_propio', 'Propio');
+
+      this.resultados = [...ahorcado, ...mayorMenor, ...preguntados, ...propio];
+    } catch (error) {
+      console.error('Error cargando resultados:', error);
+    } finally {
+      this.cargando = false;
+    }
+  }
+
+  private async obtenerResultadosDe(tabla: string, juego: string): Promise<Resultado[]> {
+    try {
+      const { data, error } = await supabase.from(tabla).select('*');
+      if (error) throw error;
+
+      return (data || []).map((r: any) => ({
         usuario: r.usuario,
         puntaje: r.puntaje,
-        total: r.total ?? null,
-        fecha: new Date(r.fecha).toLocaleString()
-      })) as Resultado[];
-
+        juego,
+        fecha: r.fecha
+          ? new Date(r.fecha).toLocaleString('es-AR', {
+              dateStyle: 'short',
+              timeStyle: 'short'
+            })
+          : ''
+      }));
     } catch (error) {
-      console.error(`Error al obtener resultados de ${tabla}`, error);
+      console.error(`Error al obtener resultados de ${tabla}:`, error);
       return [];
     }
+  }
+
+  filtrarJuego() {
+    console.log('Mostrando:', this.juegoSeleccionado);
+  }
+
+  // 🔹 Método que usa la pipe
+  resultadosPorJuego(juego: string): Resultado[] {
+    return this.filtroJuegoPipe.transform(this.resultados, juego);
   }
 }

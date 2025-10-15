@@ -1,69 +1,94 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
-import { AuthService } from '../../core/auth.service';
-import { ProfileService } from '../../core/profile.service';
-import { supabase } from '../../core/supabase.client';
+import { AuthService } from '../../core/auth.service'; // 👈 este es el servicio Auth nuevo, no AuthService
 
 @Component({
   selector: 'app-registro',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './registro.component.html',
   styleUrls: ['./registro.component.css']
 })
 export class RegistroComponent {
-  loading = false;
-  errorMsg = '';
-  form;
+  private authService = inject(AuthService);
+  private router = inject(Router);
 
-  constructor(
-    private fb: FormBuilder,
-    private auth: AuthService,
-    private profile: ProfileService,
-    private router: Router
-  ) {
-    this.form = this.fb.group({
-      first_name: ['', [Validators.required]],
-      last_name: ['', [Validators.required]],
-      age: [null as number | null, [Validators.required, Validators.min(1)]],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]]
-    });
-  }
+  usuario = {
+    nombre: '',
+    apellido: '',
+    edad: 0,
+    email: '',
+    password: '',
+    aceptoTerminos: false
+  };
 
-  async submit() {
-    this.errorMsg = '';
-    if (this.form.invalid) return;
-    this.loading = true;
+  cargando = false;
+  mostrarModal = false;
+  exito = false;
+  mensajeModal = '';
 
+  async onSubmit() {
+    if (!this.validarFormulario()) return;
+
+    this.cargando = true;
     try {
-      const { first_name, last_name, age, email, password } = this.form.value as any;
-
-      await this.auth.signUp(email, password);
-
-      const { data: userData } = await supabase.auth.getUser();
-      const user = userData.user;
-      if (!user) throw new Error('No hay sesión activa');
-
-      await this.profile.upsertProfile({
-        id: user.id,
-        email,
-        first_name,
-        last_name,
-        age: Number(age)
-      });
-
-      this.router.navigate(['/home']);
-    } catch (e: any) {
-      this.errorMsg = e?.message?.includes('already registered')
-        ? 'El usuario ya está registrado.'
-        : (e.message ?? 'Error en el registro');
+      const resultado = await this.authService.registrarUsuario(
+       `${this.usuario.nombre} ${this.usuario.apellido}`,
+        this.usuario.email,
+        this.usuario.password,
+        this.usuario.apellido,
+        this.usuario.edad
+      );
+      if (resultado.success) {
+        this.exito = true;
+        this.mensajeModal = 'Registro exitoso. Revisa tu correo para confirmar.';
+      } else {
+        this.exito = false;
+        this.mensajeModal = resultado.error || 'Error desconocido.';
+      }
+      this.mostrarModal = true;
+    } catch (error) {
+      this.exito = false;
+      this.mensajeModal = 'Error al registrar usuario.';
     } finally {
-      this.loading = false;
+      this.cargando = false;
     }
   }
+
+  validarFormulario(): boolean {
+    const u = this.usuario;
+    if (!u.nombre || !u.apellido || !u.email || !u.password) {
+      alert('Todos los campos son obligatorios.');
+      return false;
+    }
+    if (u.edad < 18 || u.edad > 99) {
+      alert('La edad debe ser entre 18 y 99 años.');
+      return false;
+    }
+    if (!u.aceptoTerminos) {
+      alert('Debe aceptar los términos.');
+      return false;
+    }
+    return true;
+  }
+
+  /** ✅ Agregado: limpia el formulario */
+  onReset() {
+    this.usuario = {
+      nombre: '',
+      apellido: '',
+      edad: 0,
+      email: '',
+      password: '',
+      aceptoTerminos: false
+    };
+  }
+
+  /** ✅ Agregado: cierra el modal */
+  cerrarModal() {
+    this.mostrarModal = false;
+    if (this.exito) this.router.navigate(['/login']);
+  }
 }
-
-

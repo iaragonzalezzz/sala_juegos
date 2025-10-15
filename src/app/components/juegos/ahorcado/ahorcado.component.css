@@ -1,10 +1,17 @@
-.fondo {
-  background-image: url('/assets/preguntados.jpg');
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+  margin: 0;
+  background-image: url('/assets/ahorcado.jpg');
+  background-repeat: no-repeat;
   background-position: center center;
   background-attachment: fixed;
   background-size: cover;
+  font-family: 'Poppins', sans-serif;
 }
-
 .ahorcado-wrap {
   max-width: 820px;
   margin: 40px auto;

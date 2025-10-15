@@ -1,14 +1,15 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { SupabaseService } from '../../../core/supabase.service';
-import { AuthService } from '../../../core/auth.service';
 import { Router } from '@angular/router';
+import { supabase } from '../../../core/supabase.client';
+import { AuthService } from '../../../core/auth.service';
+import { SalaChat } from '../chat/sala-chat';
 
 @Component({
   selector: 'app-adivina-numero',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, SalaChat],
   templateUrl: './adivina-numero.component.html',
   styleUrls: ['./adivina-numero.component.css']
 })
@@ -23,7 +24,6 @@ export class AdivinaNumeroComponent {
   mostrarModal = false;
 
   constructor(
-    private supabase: SupabaseService,
     private auth: AuthService,
     private router: Router
   ) {}
@@ -36,14 +36,14 @@ export class AdivinaNumeroComponent {
     if (this.guess === this.numeroSecreto) {
       this.gano = true;
       this.finalizado = true;
-      this.pista = '¡Adivinaste! 🎉';
+      this.pista = '🎉 ¡Adivinaste!';
       this.mostrarModal = true;
       this.guardarResultado();
       return;
     }
 
     this.intentos--;
-    this.pista = this.guess < this.numeroSecreto ? '¡Más alto!' : '¡Más bajo!';
+    this.pista = this.guess < this.numeroSecreto ? '⬆️ Más alto' : '⬇️ Más bajo';
 
     if (this.intentos === 0) {
       this.finalizado = true;
@@ -53,18 +53,12 @@ export class AdivinaNumeroComponent {
   }
 
   async guardarResultado() {
-    let usuario = 'Invitado';
-    this.auth.user$.subscribe(u => {
-      if (u?.email) usuario = u.email;
-    }).unsubscribe();
+    const usuario = this.auth.user$.value?.email || 'Anónimo';
+    const puntaje = this.gano ? this.intentos : 0;
+    const fecha = new Date().toISOString();
 
-    const puntaje = this.gano ? this.intentos : 0; // más intentos restantes = mejor puntaje
-    try {
-      await this.supabase.insertar('resultados_propio', {
-        usuario,
-        puntaje
-      });
-    } catch {}
+    const { error } = await supabase.from('resultados_adivina').insert([{ usuario, puntaje, fecha }]);
+    if (error) console.error('Error al guardar resultado:', error.message);
   }
 
   reiniciar() {
@@ -77,5 +71,7 @@ export class AdivinaNumeroComponent {
     this.mostrarModal = false;
   }
 
-  volver() { this.router.navigate(['/juegos']); }
+  volver() {
+    this.router.navigate(['/juegos']);
+  }
 }

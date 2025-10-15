@@ -2,9 +2,11 @@
   <div class="preguntados-card">
     <h2 class="titulo">Preguntados</h2>
 
-    <div class="categoria" [style.background]="getColorCategoria(preguntas[i]?.categoria || '')">
-      {{ preguntas[i]?.categoria }}
+    <div class="categoria" [style.background]="getColorCategoria(preguntas[i].categoria || '')">
+      {{ preguntas[i].categoria }}
     </div>
+
+    <h3 class="pregunta">{{ preguntas[i].pregunta }}</h3>
 
     <div class="timer">
      Tiempo restante: {{ tiempoRestante }}s
@@ -12,7 +14,7 @@
 
 
     <div class="pregunta-card">
-      <h3 class="pregunta">{{ preguntas[i]?.pregunta }}</h3>
+      <h3 class="pregunta">{{ preguntas[i].pregunta }}</h3>
     </div>
 
 
@@ -42,3 +44,4 @@
     <button class="btn-reiniciar" (click)="reiniciar()">Jugar de nuevo</button>
   </div>
 </div>
+<app-sala-chat></app-sala-chat>

@@ -1,0 +1,6 @@
+<!-- src/app/components/juegos/chat/message/message.component.html -->
+<div class="message-container" [class.mensaje-propio]="message.esPropio">
+  <div class="usuario">{{ message.usuario }}</div>
+  <div class="texto">{{ message.mensaje }}</div>
+  <div class="fecha">{{ formattedTime }}</div>
+</div>

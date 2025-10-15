@@ -2,12 +2,49 @@
   <div class="container">
     <a class="navbar-brand" routerLink="/home">Sala de Juegos</a>
     <div class="navbar-nav ms-auto">
-      <a class="nav-link" routerLink="/quien-soy" routerLinkActive="active">¿Quién soy?</a>
-      <a class="nav-link" routerLink="/chat" routerLinkActive="active">Chat</a>
-       <a routerLink="/resultados" class="nav-link">Resultados</a>
+
+      <a class="nav-link"
+         routerLink="/quien-soy"
+         routerLinkActive="active"
+         [@botonAnimacion]="estadoBotones['quienSoy']"
+         (mouseenter)="onMouseEnter('quienSoy')"
+         (mouseleave)="onMouseLeave('quienSoy')">
+        ¿Quién soy?
+      </a>
+
+      <a class="nav-link"
+         [@botonAnimacion]="estadoBotones['ranking']"
+         (mouseenter)="onMouseEnter('ranking')"
+         (mouseleave)="onMouseLeave('ranking')"
+         (click)="goToRanking()">
+        Resultados
+      </a>
+
+      <button *ngIf="!isAdmin"
+              class="nav-link btn btn-link"
+              [@botonAnimacion]="estadoBotones['encuesta']"
+              (mouseenter)="onMouseEnter('encuesta')"
+              (mouseleave)="onMouseLeave('encuesta')"
+              (click)="goToEncuesta()">
+        Encuesta
+      </button>
+
+      <button *ngIf="isAdmin"
+              class="nav-link btn btn-link"
+              [@botonAnimacion]="estadoBotones['resultadosEncuesta']"
+              (mouseenter)="onMouseEnter('resultadosEncuesta')"
+              (mouseleave)="onMouseLeave('resultadosEncuesta')"
+              (click)="goToResultadosEncuesta()">
+        Resultados Encuestas
+      </button>
 
     </div>
   </div>
 </nav>
 
-<router-outlet></router-outlet>
+<!-- Router con animación -->
+<div [@routeAnimations]="prepareRoute(routerOutlet)">
+  <router-outlet #routerOutlet="outlet"></router-outlet>
+</div>
+
+<app-sala-chat></app-sala-chat>

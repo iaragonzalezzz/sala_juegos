@@ -1,0 +1,39 @@
+<!-- src/app/components/juegos/chat/sala-chat.html -->
+<!-- Botón flotante SIEMPRE visible -->
+<button class="boton-flotante" (click)="toggleChat()">💬</button>
+
+<!-- Ventana del chat SOLO si visible() es true -->
+<div *ngIf="visible()" class="chat-ventana">
+  <div class="chat-header">
+    <span>Chat global</span>
+    <button class="cerrar-btn" (click)="toggleChat()">✖</button>
+  </div>
+
+  <!-- Mensaje de error (si no está logueado o hay límite) -->
+  <div *ngIf="error" class="modal-error">
+    {{ error }}
+  </div>
+
+  <!-- Contenedor de mensajes -->
+  <div class="chat-mensajes">
+    <app-message
+      *ngFor="let m of mensajes"
+      [message]="m"
+    />
+  </div>
+
+  <!-- Input y botón de envío -->
+  <div class="chat-input">
+    <input
+      [(ngModel)]="texto"
+      [maxlength]="limite"
+      placeholder="Escribe tu mensaje..."
+    />
+    <button (click)="enviar()" [disabled]="!texto.trim()">Enviar</button>
+  </div>
+
+  <!-- Contador de caracteres -->
+  <div class="chat-contador">
+    {{ limite - texto.length }} / {{ limite }}
+  </div>
+</div>

@@ -1,0 +1,105 @@
+<div class="container mt-4 animate__animated animate__fadeIn">
+  <h2>Encuesta de satisfacción</h2>
+  <form (ngSubmit)="enviarEncuesta()" #formEncuesta="ngForm" novalidate>
+    
+    <!-- Nombre y apellido -->
+    <div class="mb-3">
+      <label class="form-label">Nombre y apellido</label>
+      <input
+        type="text"
+        name="nombre_apellido"
+        class="form-control"
+        required
+        [(ngModel)]="encuesta.nombre_apellido"
+      />
+    </div>
+
+    <!-- Edad -->
+    <div class="mb-3">
+      <label class="form-label">Edad</label>
+      <input
+        type="number"
+        name="edad"
+        class="form-control"
+        required
+        [(ngModel)]="encuesta.edad"
+        min="18"
+        max="99"
+      />
+    </div>
+
+    <!-- Teléfono -->
+    <div class="mb-3">
+      <label class="form-label">Teléfono</label>
+      <input
+        type="text"
+        name="telefono"
+        class="form-control"
+        required
+        maxlength="10"
+        pattern="^[0-9]+$"
+        [(ngModel)]="encuesta.telefono"
+      />
+    </div>
+
+    <hr />
+
+    <!-- Pregunta 1: Experiencia -->
+    <div class="mb-3">
+      <label class="form-label">¿Cómo calificarías la experiencia?</label>
+      <select
+        class="form-select"
+        name="pregunta1"
+        required
+        [(ngModel)]="encuesta.pregunta1"
+      >
+        <option value="">Seleccione...</option>
+        <option value="excelente">Excelente</option>
+        <option value="buena">Buena</option>
+        <option value="regular">Regular</option>
+        <option value="mala">Mala</option>
+      </select>
+    </div>
+
+    <!-- Pregunta 2: Juegos favoritos -->
+    <div class="mb-3">
+      <label class="form-label">¿Qué juegos te gustaron más?</label>
+      <div *ngFor="let juego of juegos">
+        <input
+          type="checkbox"
+          [value]="juego"
+          (change)="toggleJuego(juego, $event)"
+        /> {{ juego }}
+      </div>
+    </div>
+
+    <!-- Pregunta 3: Recomendación -->
+    <div class="mb-3">
+      <label class="form-label">¿Recomendarías la sala de juegos?</label>
+      <div>
+        <input
+          type="radio"
+          name="pregunta3"
+          value="sí"
+          [(ngModel)]="encuesta.pregunta3"
+          required
+        /> Sí
+        <input
+          type="radio"
+          name="pregunta3"
+          value="no"
+          [(ngModel)]="encuesta.pregunta3"
+          required
+        /> No
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary w-100 mt-3">
+      Enviar encuesta
+    </button>
+  </form>
+
+  <div *ngIf="mensaje" class="alert alert-info mt-3">
+    {{ mensaje }}
+  </div>
+</div>

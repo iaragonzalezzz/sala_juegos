@@ -1,0 +1,36 @@
+/* src/app/components/juegos/chat/message/message.component.css */
+.message-container {
+  max-width: 85%;
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: 13px;
+  word-wrap: break-word;
+  margin-bottom: 6px;
+}
+
+.mensaje-propio {
+  align-self: flex-end;
+  background: #ff00ff;
+  color: white;
+  box-shadow: 0 0 8px #ff00ff;
+}
+
+.mensaje-ajeno {
+  align-self: flex-start;
+  background: #222;
+  color: #fff;
+  border: 1px solid #ff00ff;
+}
+
+.usuario {
+  font-size: 11px;
+  opacity: 0.8;
+  margin-bottom: 2px;
+}
+
+.fecha {
+  font-size: 10px;
+  text-align: right;
+  opacity: 0.6;
+  margin-top: 3px;
+}

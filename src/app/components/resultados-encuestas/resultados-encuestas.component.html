@@ -1,0 +1,21 @@
+<div class="container mt-4">
+  <h2>Resultados de Encuestas</h2>
+  <p>Aquí se muestran los resultados de las encuestas de los usuarios:</p>
+
+  <div *ngIf="cargando">Cargando resultados...</div>
+
+  <!-- Grid de cards -->
+  <div *ngIf="!cargando && resultados.length > 0" class="cards-grid">
+    <div *ngFor="let r of resultados" class="card">
+      <h3>{{ r.nombre_apellido }}</h3>
+      <p><strong>Edad:</strong> {{ r.edad }}</p>
+      <p><strong>Teléfono:</strong> {{ r.telefono }}</p>
+      <p><strong>Pregunta 1:</strong> {{ r.pregunta1 }}</p>
+      <p><strong>Pregunta 2:</strong> {{ r.pregunta2 }}</p>
+      <p><strong>Pregunta 3:</strong> {{ r.pregunta3 }}</p>
+      <small>{{ r.created_at | date:'short' }}</small>
+    </div>
+  </div>
+
+  <p *ngIf="!cargando && resultados.length === 0">No hay resultados todavía.</p>
+</div>

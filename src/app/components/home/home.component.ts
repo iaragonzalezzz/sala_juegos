@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
 import { AuthService } from '../../core/auth.service';
+import { SalaChat } from '../juegos/chat/sala-chat';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, SalaChat],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })

@@ -1,0 +1,52 @@
+.encuesta-container {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 25px;
+  background: rgba(10, 10, 20, 0.9);
+  border-radius: 15px;
+  color: white;
+  font-family: 'Poppins', sans-serif;
+}
+
+h2 {
+  color: #00ffff;
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+label {
+  display: block;
+  margin-bottom: 6px;
+  color: #00ffff;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  background: #1c1c1c;
+  color: white;
+  border: 1px solid #00ffff;
+}
+
+.error {
+  color: #ff5555;
+  margin: 15px 0;
+  font-weight: bold;
+}
+
+button {
+  background: linear-gradient(90deg, #00ffff, #007bff);
+  color: #000;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  width: 100%;
+}

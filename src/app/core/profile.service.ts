@@ -1,41 +1,29 @@
 import { Injectable } from '@angular/core';
 import { supabase } from './supabase.client';
 
-export interface Profile {
-  id: string;     
-  email: string;
-  first_name?: string;
-  last_name?: string;
-  age?: number;
-}
-
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class ProfileService {
-
-
-  async upsertProfile(p: Profile) {
+  // 🔹 Guarda o actualiza el perfil
+  async upsertProfile(profile: any) {
     const { data, error } = await supabase
       .from('profiles')
-      .upsert(p, { onConflict: 'id' })
-      .select();
+      .upsert(profile);
 
-    if (error) throw error;
-    return data?.[0];
+    if (error) console.error('Error al guardar perfil:', error.message);
+    else console.log('Perfil guardado/actualizado correctamente ✅');
+
+    return data;
   }
 
-  async getMyProfile() {
-    const { data: { user } } = await supabase.auth.getUser();
-    if (!user) return null;
-
+  // 🔹 Obtiene el perfil de un usuario por su ID
+  async getProfile(userId: string) {
     const { data, error } = await supabase
       .from('profiles')
       .select('*')
-      .eq('id', user.id)
+      .eq('id', userId)
       .single();
 
-    if (error) throw error;
+    if (error) console.error('Error obteniendo perfil:', error.message);
     return data;
   }
 }
