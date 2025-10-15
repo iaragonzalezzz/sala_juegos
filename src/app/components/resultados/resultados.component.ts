@@ -76,7 +76,6 @@ export class ResultadosComponent implements OnInit {
     console.log('Mostrando:', this.juegoSeleccionado);
   }
 
-  // 🔹 Método que usa la pipe
   resultadosPorJuego(juego: string): Resultado[] {
     return this.filtroJuegoPipe.transform(this.resultados, juego);
   }

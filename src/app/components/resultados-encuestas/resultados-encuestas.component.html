@@ -1,7 +1,5 @@
 <div class="container mt-4">
   <h2>Resultados de Encuestas</h2>
-  <p>Aquí se muestran los resultados de las encuestas de los usuarios:</p>
-
   <div *ngIf="cargando">Cargando resultados...</div>
 
   <div *ngIf="!cargando && resultados.length > 0" class="cards-grid">

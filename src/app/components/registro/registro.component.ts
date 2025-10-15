@@ -25,33 +25,33 @@ export class RegistroComponent {
   };
 
   cargando = false;
-  mostrarModal = false;
-  exito = false;
-  mensajeModal = '';
+  errorMsg = '';
+  successMsg = '';
 
   async onSubmit() {
+    this.errorMsg = '';
+    this.successMsg = '';
+
     if (!this.validarFormulario()) return;
 
     this.cargando = true;
     try {
       const resultado = await this.authService.registrarUsuario(
-       `${this.usuario.nombre} ${this.usuario.apellido}`,
+        `${this.usuario.nombre} ${this.usuario.apellido}`,
         this.usuario.email,
         this.usuario.password,
         this.usuario.apellido,
         this.usuario.edad
       );
+
       if (resultado.success) {
-        this.exito = true;
-        this.mensajeModal = 'Registro exitoso. Revisa tu correo para confirmar.';
+        this.successMsg = 'Registro exitoso. Revisa tu correo para confirmar.';
+        setTimeout(() => this.router.navigate(['/login']), 2000);
       } else {
-        this.exito = false;
-        this.mensajeModal = resultado.error || 'Error desconocido.';
+        this.errorMsg = resultado.error || 'El usuario ya se encuentra registrado.';
       }
-      this.mostrarModal = true;
     } catch (error) {
-      this.exito = false;
-      this.mensajeModal = 'Error al registrar usuario.';
+      this.errorMsg = 'Error al registrar usuario.';
     } finally {
       this.cargando = false;
     }
@@ -60,15 +60,15 @@ export class RegistroComponent {
   validarFormulario(): boolean {
     const u = this.usuario;
     if (!u.nombre || !u.apellido || !u.email || !u.password) {
-      alert('Todos los campos son obligatorios.');
+      this.errorMsg = 'Todos los campos son obligatorios.';
       return false;
     }
     if (u.edad < 18 || u.edad > 99) {
-      alert('La edad debe ser entre 18 y 99 años.');
+      this.errorMsg = 'La edad debe ser entre 18 y 99 años.';
       return false;
     }
     if (!u.aceptoTerminos) {
-      alert('Debe aceptar los términos.');
+      this.errorMsg = 'Debe aceptar los términos y condiciones.';
       return false;
     }
     return true;
@@ -83,10 +83,7 @@ export class RegistroComponent {
       password: '',
       aceptoTerminos: false
     };
-  }
-
-  cerrarModal() {
-    this.mostrarModal = false;
-    if (this.exito) this.router.navigate(['/login']);
+    this.errorMsg = '';
+    this.successMsg = '';
   }
 }

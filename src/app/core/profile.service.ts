@@ -3,7 +3,7 @@ import { supabase } from './supabase.client';
 
 @Injectable({ providedIn: 'root' })
 export class ProfileService {
-  // 🔹 Guarda o actualiza el perfil
+  //guarda o actualiza el perfil
   async upsertProfile(profile: any) {
     const { data, error } = await supabase
       .from('profiles')
@@ -15,7 +15,7 @@ export class ProfileService {
     return data;
   }
 
-  // 🔹 Obtiene el perfil de un usuario por su ID
+  //obtiene el perfil de un usuario por su ID
   async getProfile(userId: string) {
     const { data, error } = await supabase
       .from('profiles')

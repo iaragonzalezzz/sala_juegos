@@ -3,8 +3,6 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-  width: 100%;
-  margin: 0;
   background-image: url('/assets/registro.gif');
   background-repeat: no-repeat;
   background-position: center center;
@@ -12,6 +10,7 @@
   background-size: cover;
   font-family: 'Poppins', sans-serif;
 }
+
 .registro-container {
   max-width: 400px;
   margin: 60px auto;
@@ -21,38 +20,42 @@
   box-shadow: 0 8px 20px rgba(0,0,0,0.1);
   color: #333;
   text-align: center;
-  font-family: 'Poppins', sans-serif;
 }
 
 h2 {
-  margin-bottom: 25px;
+  margin-bottom: 20px;
   font-weight: 600;
   color: #4B0082;
 }
 
-
-.registro-form {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
+/* 🔹 Mensajes */
+.mensaje {
+  font-weight: 500;
+  margin-bottom: 15px;
+  padding: 10px;
+  border-radius: 8px;
 }
 
+.mensaje.error {
+  background: rgba(220, 53, 69, 0.1);
+  color: #dc3545;
+  border: 1px solid #dc3545;
+}
+
+.mensaje.success {
+  background: rgba(40, 167, 69, 0.1);
+  color: #28a745;
+  border: 1px solid #28a745;
+}
+
+/* --- resto igual --- */
 .form-group {
   display: flex;
   flex-direction: column;
   text-align: left;
 }
 
-label {
-  margin-bottom: 6px;
-  font-size: 14px;
-  color: #555;
-}
-
-input[type='text'],
-input[type='number'],
-input[type='email'],
-input[type='password'] {
+input {
   padding: 10px 12px;
   border-radius: 8px;
   border: 1px solid #ccc;
@@ -67,16 +70,10 @@ input:focus {
   box-shadow: 0 0 5px rgba(75,0,130,0.3);
 }
 
-/* Checkbox */
 .checkbox-group {
   display: flex;
   align-items: center;
   gap: 8px;
-}
-
-.checkbox-group label {
-  font-size: 13px;
-  color: #555;
 }
 
 .buttons-container {
@@ -106,70 +103,4 @@ button[disabled] {
   background: #ccc;
   color: #888;
   cursor: not-allowed;
-}
-
-/* Modal */
-.modal-backdrop {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 10;
-}
-
-.modal {
-  background: #fff;
-  padding: 25px;
-  border-radius: 15px;
-  max-width: 320px;
-  text-align: center;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-  animation: fadeIn 0.3s ease;
-}
-
-.modal h3 {
-  margin-bottom: 12px;
-}
-
-.modal h3.success {
-  color: #28a745;
-}
-
-.modal h3.error {
-  color: #dc3545;
-}
-
-.modal p {
-  margin-bottom: 18px;
-  font-size: 14px;
-  color: #555;
-}
-
-.modal button {
-  background: #8A2BE2;
-  color: #fff;
-  padding: 8px 15px;
-  border-radius: 8px;
-  font-weight: 600;
-}
-
-.modal button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
 }

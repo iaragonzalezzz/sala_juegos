@@ -35,7 +35,10 @@ export class LoginComponent {
 
   async submit() {
     this.errorMsg = '';
-    if (this.form.invalid) return;
+    if (this.form.invalid) {
+      this.errorMsg = 'Por favor, complete todos los campos correctamente.';
+      return;
+    }
 
     this.loading = true;
     const { email, password } = this.form.value as any;
@@ -44,13 +47,13 @@ export class LoginComponent {
       const result = await this.auth.signIn(email, password);
 
       if (!result.success) {
-        this.errorMsg = result.error || 'Email o contraseña incorrectos';
+        this.errorMsg = result.error || 'Email o contraseña incorrectos.';
         return;
       }
 
       this.router.navigate(['/home']);
     } catch (err: any) {
-      this.errorMsg = err.message ?? 'Ocurrió un error inesperado';
+      this.errorMsg = err.message ?? 'Ocurrió un error inesperado.';
       console.error('Error login:', this.errorMsg);
     } finally {
       this.loading = false;
